@@ -35,10 +35,10 @@ var db = mongoose.connect('mongodb://root:admin@ds039684.mongolab.com:39684/appt
 
 app.use('/season',episodeRouter);
 
-/*
+
 app.get('/',function(req,res){
   res.send("Welcome to Watch The Thrones");
-}); */
+});
 
 
 
