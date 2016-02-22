@@ -34,6 +34,20 @@ var episodeController = function(Episode){
     }
 
 
+    var getep = function (req, res) {
+        Episode.findOne({ "season":req.params.s, "episode":req.params.e}, function(err,epi) {
+            //req.episode=epi;
+            if (err) {
+                res.status(500).send(err);
+            }
+            else {
+                res.json(epi);
+            }
+        });
+    }
+
+
+
 
     var patch = function(req,res){
         if(req.body._id){
@@ -62,6 +76,9 @@ var episodeController = function(Episode){
         });
 
     }
+
+
+
 
 
 
@@ -100,6 +117,7 @@ var episodeController = function(Episode){
         post:post,
         get:get,
         getseason:getseason,
+        getep:getep,
         patch:patch,
         del:del
 

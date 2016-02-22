@@ -19,16 +19,18 @@ var eroutes= function(Episode) {
         .post(episodeController.post)
         .get(episodeController.get);
 
-   
 
 
 
-    episodeRouter.route('/:EID')
-        .delete(episodeController.del);
+    episodeRouter.route('/:s/:e')
+        .delete(episodeController.del)
+        .patch(episodeController.patch)
+        .get(episodeController.getep);
+
+
 
     episodeRouter.route('/:s')
-        .get(episodeController.getseason)
-        .patch(episodeController.patch);
+        .get(episodeController.getseason);
 
 
 

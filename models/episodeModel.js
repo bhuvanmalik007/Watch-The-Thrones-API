@@ -12,6 +12,7 @@ var episodeModel= new Schema({
     season: { type: String },
     episode:{type: String},
     href:{type: String},
+    episodename: {type: String},
     desc:{type: String},
     torrlink:{type: String},
     thumb: {type: String}
