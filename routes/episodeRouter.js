@@ -17,7 +17,7 @@ var eroutes= function(Episode) {
 
     episodeRouter.route('/all')
         .post(episodeController.post)
-        .get(episodeController.get);
+        .get(episodeController.getall);
 
 
 

@@ -9,7 +9,7 @@ var episodeController = function(Episode){
     }
 
 
-    var get = function (req, res) {
+    var getall = function (req, res) {
         Episode.find(function (err, episodes) {
             if (err) {
                 console.log(err);
@@ -115,7 +115,7 @@ var episodeController = function(Episode){
 
     return{
         post:post,
-        get:get,
+        getall:getall,
         getseason:getseason,
         getep:getep,
         patch:patch,
