@@ -13,10 +13,10 @@ var eroutes= function(Episode) {
     var episodeController = require('../controllers/episodeController')(Episode);
 
 
-
+    episodeRouter.route('/post')
+        .post(episodeController.post);
 
     episodeRouter.route('/all')
-        .post(episodeController.post)
         .get(episodeController.getall);
 
 
@@ -25,7 +25,8 @@ var eroutes= function(Episode) {
     episodeRouter.route('/:s/:e')
         .delete(episodeController.del)
         .patch(episodeController.patch)
-        .get(episodeController.getep);
+        .get(episodeController.getep)
+        .put(episodeController.put);
 
 
 
