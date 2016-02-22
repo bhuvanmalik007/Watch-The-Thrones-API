@@ -35,13 +35,13 @@ var episodeController = function(Episode){
 
 
     var getep = function (req, res) {
-        Episode.findOne({ "season":req.params.s, "episode":req.params.e}, function(err,epi) {
-            //req.episode=epi;
+        Episode.findOne({ "season":req.params.s, "episode":req.params.e}, function(err,episode) {
+
             if (err) {
                 res.status(500).send(err);
             }
             else {
-                res.json(epi);
+                res.json(episode);
             }
         });
     }
@@ -86,7 +86,7 @@ var episodeController = function(Episode){
 
 
     var del = function(req,res){
-        Episode.findOne({ "EID" : req.params.EID}, function(err,episode){
+        Episode.findOne({ "season":req.params.s, "episode":req.params.e}, function(err,episode){
             if(err)
             {
                 res.status(500).send(err);
