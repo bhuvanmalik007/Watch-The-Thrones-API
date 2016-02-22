@@ -11,10 +11,12 @@ var episodeModel= new Schema({
 
     season: { type: String },
     episode:{type: String},
-    href:{type: String},
+    href480:{type: String},
+    href720:{type: String},
     episodename: {type: String},
     desc:{type: String},
-    torrlink:{type: String},
+    torrlink480:{type: String},
+    torrlink720:{type: String},
     thumb: {type: String}
 
 });

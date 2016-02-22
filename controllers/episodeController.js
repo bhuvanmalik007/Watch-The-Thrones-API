@@ -58,11 +58,14 @@ var episodeController = function(Episode){
                 req.episode=episode;
                 req.episode.season=req.body.season;
                 req.episode.episode=req.body.episode;
-                req.episode.href=req.body.href;
+                req.episode.href480=req.body.href480;
+                req.episode.href720=req.body.href720;
                 req.episode.episodename=req.body.episodename;
                 req.episode.desc=req.body.desc;
-                req.episode.torrlink=req.body.torrlink;
+                req.episode.torrlink480=req.body.torrlink480;
+                req.episode.torrlink720=req.body.torrlink720;
                 req.episode.thumb=req.body.thumb;
+
                 req.episode.save(function(err){
                     if(err){
                         res.status(505).send(err);
