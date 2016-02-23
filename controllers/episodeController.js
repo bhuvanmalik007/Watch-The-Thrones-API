@@ -21,6 +21,20 @@ var episodeController = function(Episode){
     }
 
 
+    var createseason = function (req, res) {
+        for(var i=1;i<=10;i++){
+
+            var episode = new Episode;
+            episode.season=req.params.s;
+            episode.episode=i;
+            episode.save();
+
+        }
+        res.send("done");
+
+    }
+
+
     var getseason = function (req, res) {
         Episode.find({ "season":req.params.s}, function(err,episodes) {
 
@@ -46,7 +60,7 @@ var episodeController = function(Episode){
         });
     }
     
-    var update = function (req, res) {
+   /* var update = function (req, res) {
         
         Episode.findOne({ "season":req.params.s, "episode":req.params.e}, function(err,episode) {
 
@@ -62,7 +76,7 @@ var episodeController = function(Episode){
         });
         
         
-    }
+    }  */
 
 
     var put = function(req,res){
@@ -129,6 +143,33 @@ var episodeController = function(Episode){
 
 
 
+    //var deleteseason = function(req,res){
+    //    Episode.find({ "season":req.params.s}, function(err,episodes) {
+    //
+    //        var epi=episodes;
+    //        if (err) {
+    //            res.status(500).send(err);
+    //        }
+    //        else {
+    //
+    //            for (var i=1;i<=10;i++) {
+    //                epi[i].remove(function (err) {
+    //                    if (err) {
+    //                        res.status(500).send(err);
+    //                    }
+    //                    else {
+    //                        res.send("removed");
+    //                    }
+    //                });
+    //            }
+    //
+    //           // res.send("removed");
+    //
+    //
+    //        }
+    //    });
+    //
+    //}
 
 
 
@@ -137,6 +178,27 @@ var episodeController = function(Episode){
 
     var del = function(req,res){
         Episode.findOne({ "season":req.params.s, "episode":req.params.e}, function(err,episode){
+            if(err)
+            {
+                res.status(500).send(err);
+            }
+            else {
+                episode.remove(function (err) {
+                    if (err) {
+                        res.status(500).send(err);
+                    }
+                    else {
+                        res.status(204).send("removed");
+                    }
+                });
+            }
+        });
+
+    }
+
+
+    var delbyid = function(req,res){
+        Episode.findById(req.params.id, function(err,episode){
             if(err)
             {
                 res.status(500).send(err);
@@ -168,11 +230,14 @@ var episodeController = function(Episode){
 
         getall:getall,
         getseason:getseason,
-        update:update,
+        //deleteseason:deleteseason,
+        createseason:createseason,
+        //update:update,
         getep:getep,
         put:put,
         patch:patch,
-        del:del
+        del:del,
+        delbyid:delbyid
 
 
     }
