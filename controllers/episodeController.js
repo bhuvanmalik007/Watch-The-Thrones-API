@@ -168,6 +168,7 @@ var episodeController = function(Episode){
 
         getall:getall,
         getseason:getseason,
+        update:update,
         getep:getep,
         put:put,
         patch:patch,

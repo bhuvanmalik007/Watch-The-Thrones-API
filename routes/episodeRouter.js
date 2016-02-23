@@ -20,7 +20,7 @@ var eroutes= function(Episode) {
         .get(episodeController.getall);
 
 
-    episodeRouter.route('/:s/:e')
+    episodeRouter.route('/:s/:e/u')
         .get(episodeController.update);
         
     episodeRouter.route('/:s/:e')
