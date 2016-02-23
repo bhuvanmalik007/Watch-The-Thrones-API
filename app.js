@@ -35,6 +35,12 @@ var db = mongoose.connect('mongodb://root:admin@ds039684.mongolab.com:39684/appt
 
 app.use('/season',episodeRouter);
 
+app.get('/update',function(req,res){
+  
+  db.episodes({}, {$unset: { description:1}}, false, true);
+  
+});
+
 
 app.get('/',function(req,res){
   res.send("Welcome to Watch The Thrones");
