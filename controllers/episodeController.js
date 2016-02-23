@@ -45,6 +45,24 @@ var episodeController = function(Episode){
             }
         });
     }
+    
+    var update = function (req, res) {
+        
+        Episode.findOne({ "season":req.params.s, "episode":req.params.e}, function(err,episode) {
+
+            if (err) {
+                res.status(500).send(err);
+            }
+            else {
+                episode.href=undefined;
+                episode.save();
+                
+                res.json(episode);
+            }
+        });
+        
+        
+    }
 
 
     var put = function(req,res){
