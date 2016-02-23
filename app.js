@@ -7,6 +7,9 @@ var bodyParser = require('body-parser');
 var mongoose=require('mongoose');
 var Episode = require('./models/episodeModel');
 
+var http = require("http");
+//var request = require('request');
+
 
 
 var episodeRouter= require('./routes/episodeRouter')(Episode);
@@ -16,6 +19,15 @@ var episodeRouter= require('./routes/episodeRouter')(Episode);
 
 
 var app = express();
+
+
+var options = {
+  host: 'http://dl.farsimovie.org',
+  //method: 'HEAD',
+  port: 80,
+  path: '/Serial/GameofThrones/S01/Game.of.Thrones.S01E01.480p.mkv'
+};
+
 
 
 app.use(bodyParser.json());
@@ -35,10 +47,18 @@ var db = mongoose.connect('mongodb://root:admin@ds039684.mongolab.com:39684/appt
 
 app.use('/season',episodeRouter);
 
-app.get('/update',function(req,res){
-  
-  db.episodes({}, {$unset: { description:1}}, false, true);
-  
+app.get('/size',function(reqt,resp){
+
+  http.get(options, function(res) {
+    console.log("Got response: " + res.statusCode);
+
+    for(var item in res.headers) {
+      console.log(item + ": " + res.headers[item]);
+    }
+  }).on('error', function(e) {
+    console.log("Got error: " + e.message);
+  });
+
 });
 
 

@@ -1,20 +1,6 @@
 {
-
-
-  "season": "1",
-  "episode": "1",
-  "href": "http://dl.farsimovie.org/Serial/Game of Thrones/S01/Game.of.Thrones.S01E01.480p.mkv",
- "episodename": "Winter Is Coming",
- "desc": "Jon Arryn, the Hand of the King, is dead. King Robert Baratheon plans to ask his oldest friend, Eddard Stark, to take Jon's place. Across the sea, Viserys Targaryen plans to wed his sister to a nomadic warlord in exchange for an army.",
- "thumb": "http://i.lv3.hbo.com/assets/images/series/game-of-thrones/episodes/1/1/winter-is-coming-1024.jpg"
-
-}
-
-
-
-{
     "episodename":"Winter Is Coming",
-
+    
     "desc": "Jon Arryn, the Hand of the King, is dead. King Robert Baratheon plans to ask his oldest friend, Eddard Stark, to take Jon's place. Across the sea, Viserys Targaryen plans to wed his sister to a nomadic warlord in exchange for an army.",
 }
 
@@ -24,3 +10,21 @@ https://codeshare.io/Fs52M
 "href480": "http://dl.farsimovie.org/Serial/Game of Thrones/S01/Game.of.Thrones.S01E01.480p.mkv”
 
 http://stackoverflow.com/questions/4486926/delete-a-key-from-a-mongodb-document-using-mongoose
+
+
+
+http://stackoverflow.com/questions/5922842/getting-http-headers-with-node-js
+
+
+
+{
+    "_id": "56cb15e2d865251205d91c36",
+    "season": "1",
+    "episode": "1",
+    "href480": "http://dl.farsimovie.org/Serial/Game of Thrones/S01/Game.of.Thrones.S01E01.480p.mkv",
+    "episodename": "Winter Is Coming",
+    "desc": "Jon Arryn, the Hand of the King, is dead. King Robert Baratheon plans to ask his oldest friend, Eddard Stark, to take Jon's place. Across the sea, Viserys Targaryen plans to wed his sister to a nomadic warlord in exchange for an army.",
+    "thumb": "http://i.lv3.hbo.com/assets/images/series/game-of-thrones/episodes/1/1/winter-is-coming-1024.jpg",
+    "__v": 0,
+    "torrlink": "null"
+  }
