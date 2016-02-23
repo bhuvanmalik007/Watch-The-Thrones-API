@@ -20,13 +20,15 @@ var eroutes= function(Episode) {
         .get(episodeController.getall);
 
 
-
-
+    episodeRouter.route('/:s/:e')
+        .get(episodeController.update);
+        
     episodeRouter.route('/:s/:e')
         .delete(episodeController.del)
         .patch(episodeController.patch)
         .get(episodeController.getep)
         .put(episodeController.put);
+        
 
 
 
