@@ -22,10 +22,10 @@ var app = express();
 
 
 var options = {
-  host: 'http://dl.farsimovie.org',
+  host: 'http://google.com',
   //method: 'HEAD',
   port: 80,
-  path: '/Serial/GameofThrones/S01/Game.of.Thrones.S01E02.480p.mkv'
+  path: '/'
 };
 
 
@@ -53,6 +53,7 @@ app.get('/size',function(reqt,resp){
     console.log("Got response: " + res.statusCode);
 
     for(var item in res.headers) {
+     // res.send(item + ": " + res.headers[item]);
       console.log(item + ": " + res.headers[item]);
     }
   }).on('error', function(e) {
