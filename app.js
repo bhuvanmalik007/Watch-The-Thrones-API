@@ -25,7 +25,7 @@ var options = {
   host: 'http://dl.farsimovie.org',
   //method: 'HEAD',
   port: 80,
-  path: '/Serial/GameofThrones/S01/Game.of.Thrones.S01E01.480p.mkv'
+  path: '/Serial/GameofThrones/S01/Game.of.Thrones.S01E02.480p.mkv'
 };
 
 
