@@ -51,11 +51,11 @@ app.get('/size',function(reqt,resp){
 
   http.get(options, function(res) {
     console.log("Got response: " + res.statusCode);
-
-    for(var item in res.headers) {
-      res.send(item + ": " + res.headers[item]);
-      console.log(item + ": " + res.headers[item]);
-    }
+ if (res.headers['content-length']) {
+            var file_size = res.headers['content-length'];
+            resp.send(file_size);
+            console.log(file_size);
+        }
   }).on('error', function(e) {
     console.log("Got error: " + e.message);
   });
