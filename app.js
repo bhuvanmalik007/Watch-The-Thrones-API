@@ -22,7 +22,7 @@ var app = express();
 
 
 var options = {
-  host: 'http://stackoverflow.com',
+  host: 'www.stackoverflow.com',
   method: 'HEAD',
   port: 80,
   path: '/'
@@ -47,20 +47,20 @@ var db = mongoose.connect('mongodb://root:admin@ds039684.mongolab.com:39684/appt
 
 app.use('/season',episodeRouter);
 
-app.get('/size',function(reqt,resp){
+// app.get('/size',function(reqt,resp){
 
   http.get(options, function(res) {
     console.log("Got response: " + res.statusCode);
  if (res.headers['content-length']) {
             var file_size = res.headers['content-length'];
-            resp.send(file_size);
+            res.send(file_size);
             console.log(file_size);
         }
   }).on('error', function(e) {
     console.log("Got error: " + e.message);
   });
 
-});
+// });
 
 
 app.get('/',function(req,res){
