@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var mongoose=require('mongoose');
 var Episode = require('./models/episodeModel');
 
-//var http = require("http");
+var http = require("http");
 //var request = require('request');
 
 
@@ -21,12 +21,12 @@ var episodeRouter= require('./routes/episodeRouter')(Episode);
 var app = express();
 
 
-// var options = {
-//   host: 'http://google.com',
-//   //method: 'HEAD',
-//   port: 80,
-//   path: '/'
-// };
+var options = {
+  host: 'http://stackoverflow.com',
+  method: 'HEAD',
+  port: 80,
+  path: '/'
+};
 
 
 
@@ -47,20 +47,20 @@ var db = mongoose.connect('mongodb://root:admin@ds039684.mongolab.com:39684/appt
 
 app.use('/season',episodeRouter);
 
-//app.get('/size',function(reqt,resp){
+app.get('/size',function(reqt,resp){
 
-//   http.get(options, function(res) {
-//     console.log("Got response: " + res.statusCode);
+  http.get(options, function(res) {
+    console.log("Got response: " + res.statusCode);
 
-//     for(var item in res.headers) {
-//     // res.send(item + ": " + res.headers[item]);
-//       console.log(item + ": " + res.headers[item]);
-//     }
-//   }).on('error', function(e) {
-//     console.log("Got error: " + e.message);
-//   });
+    for(var item in res.headers) {
+     // res.send(item + ": " + res.headers[item]);
+      console.log(item + ": " + res.headers[item]);
+    }
+  }).on('error', function(e) {
+    console.log("Got error: " + e.message);
+  });
 
-// });
+});
 
 
 app.get('/',function(req,res){
