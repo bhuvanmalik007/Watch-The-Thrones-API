@@ -11,24 +11,19 @@ var eroutes= function(Episode) {
     var episodeRouter=express.Router();
 
     var episodeController = require('../controllers/episodeController')(Episode);
+    
+    
+     episodeRouter.route('/:id')
+        .delete(episodeController.delbyid);
 
 
     episodeRouter.route('/post')
         .post(episodeController.post);
 
-    episodeRouter.route('/create/:s')
-        .post(episodeController.createseason);
-
-
-
-
     episodeRouter.route('/all')
         .get(episodeController.getall);
 
 
-    //episodeRouter.route('/:s/:e/u')
-    //    .get(episodeController.update);
-        
     episodeRouter.route('/:s/:e')
         .delete(episodeController.del)
         .patch(episodeController.patch)
@@ -40,12 +35,8 @@ var eroutes= function(Episode) {
 
     episodeRouter.route('/:s')
         .get(episodeController.getseason)
-       // .delete(episodeController.deleteseason)
-    ;
-    episodeRouter.route('/:id')
-        .delete(episodeController.delbyid)
-        // .delete(episodeController.deleteseason)
-    ;
+        .post(episodeController.createseason);
+
 
 
 

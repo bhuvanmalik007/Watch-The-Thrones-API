@@ -60,23 +60,7 @@ var episodeController = function(Episode){
         });
     }
     
-   /* var update = function (req, res) {
-        
-        Episode.findOne({ "season":req.params.s, "episode":req.params.e}, function(err,episode) {
-
-            if (err) {
-                res.status(500).send(err);
-            }
-            else {
-                episode.href=undefined;
-                episode.save();
-                
-                res.json(episode);
-            }
-        });
-        
-        
-    }  */
+ 
 
 
     var put = function(req,res){
@@ -141,41 +125,6 @@ var episodeController = function(Episode){
 
     }
 
-
-
-    //var deleteseason = function(req,res){
-    //    Episode.find({ "season":req.params.s}, function(err,episodes) {
-    //
-    //        var epi=episodes;
-    //        if (err) {
-    //            res.status(500).send(err);
-    //        }
-    //        else {
-    //
-    //            for (var i=1;i<=10;i++) {
-    //                epi[i].remove(function (err) {
-    //                    if (err) {
-    //                        res.status(500).send(err);
-    //                    }
-    //                    else {
-    //                        res.send("removed");
-    //                    }
-    //                });
-    //            }
-    //
-    //           // res.send("removed");
-    //
-    //
-    //        }
-    //    });
-    //
-    //}
-
-
-
-
-
-
     var del = function(req,res){
         Episode.findOne({ "season":req.params.s, "episode":req.params.e}, function(err,episode){
             if(err)
@@ -230,9 +179,9 @@ var episodeController = function(Episode){
 
         getall:getall,
         getseason:getseason,
-        //deleteseason:deleteseason,
+    
         createseason:createseason,
-        //update:update,
+     
         getep:getep,
         put:put,
         patch:patch,
