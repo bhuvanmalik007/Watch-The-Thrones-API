@@ -53,7 +53,7 @@ app.get('/size',function(reqt,resp){
     console.log("Got response: " + res.statusCode);
 
     for(var item in res.headers) {
-     // res.send(item + ": " + res.headers[item]);
+      res.send(item + ": " + res.headers[item]);
       console.log(item + ": " + res.headers[item]);
     }
   }).on('error', function(e) {
