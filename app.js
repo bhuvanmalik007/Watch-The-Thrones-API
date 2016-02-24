@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var mongoose=require('mongoose');
 var Episode = require('./models/episodeModel');
 
-var http = require("http");
+//var http = require('http');
 //var request = require('request');
 
 
@@ -21,12 +21,12 @@ var episodeRouter= require('./routes/episodeRouter')(Episode);
 var app = express();
 
 
-var options = {
-  host: 'www.stackoverflow.com',
-  method: 'HEAD',
-  port: 80,
-  path: '/'
-};
+//var options = {
+//  host: 'dl.farsimovie.org',
+//  method: 'HEAD',
+//  port: 80,
+//  path: '/Serial/GameofThrones/S01/Game.of.Thrones.S01E01.480p.mkv'
+//};
 
 
 
@@ -47,20 +47,21 @@ var db = mongoose.connect('mongodb://root:admin@ds039684.mongolab.com:39684/appt
 
 app.use('/season',episodeRouter);
 
-// app.get('/size',function(reqt,resp){
-
-  http.get(options, function(res) {
-    console.log("Got response: " + res.statusCode);
- if (res.headers['content-length']) {
-            var file_size = res.headers['content-length'];
-            res.send(file_size);
-            console.log(file_size);
-        }
-  }).on('error', function(e) {
-    console.log("Got error: " + e.message);
-  });
-
-// });
+ //app.get('/size',function(reqt,resp){
+ //
+ // http.get(options, function(res) {
+ //   console.log("Got response: " + res.statusCode);
+ //   console.log(res)
+ //if (res.headers['content-length']) {
+ //           var file_size = res.headers['content-length'];
+ //           resp.send(file_size);
+ //           console.log(file_size);
+ //       }
+ // }).on('error', function(e) {
+ //   console.log("Got error: " + e.message);
+ // });
+ //
+ //});
 
 
 app.get('/',function(req,res){
