@@ -65,7 +65,7 @@ app.use('/season',episodeRouter);
 
 
 app.get('/',function(req,res){
-  res.send("Welcome to Watch The Thrones");
+  res.redirect('http://watchthethrone.herokuapp.com');
 });
 
 
