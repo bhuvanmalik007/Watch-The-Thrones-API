@@ -36,12 +36,15 @@ var episodeController = function(Episode){
 
 
     var getseason = function (req, res) {
-        Episode.find({ "season":req.params.s}, function(err,episodes) {
+        Episode.find({ "season":req.params.s},function(err,episodes) {
 
             if (err) {
                 console.log(err);
             }
             else {
+                episodes.sort(function (a, b){
+                    return a.episode- b.episode;
+                });
                 res.json(episodes);
             }
         });
