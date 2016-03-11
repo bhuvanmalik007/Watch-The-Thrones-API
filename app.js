@@ -6,6 +6,11 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose=require('mongoose');
 var Episode = require('./models/episodeModel');
+var WebTorrent = require('webtorrent');
+var fs = require('fs');
+
+
+
 
 //var http = require('http');
 //var request = require('request');
@@ -21,12 +26,7 @@ var episodeRouter= require('./routes/episodeRouter')(Episode);
 var app = express();
 
 
-//var options = {
-//  host: 'dl.farsimovie.org',
-//  method: 'HEAD',
-//  port: 80,
-//  path: '/Serial/GameofThrones/S01/Game.of.Thrones.S01E01.480p.mkv'
-//};
+
 
 
 
@@ -47,25 +47,29 @@ var db = mongoose.connect('mongodb://root:admin@ds039684.mongolab.com:39684/appt
 
 app.use('/season',episodeRouter);
 
- //app.get('/size',function(reqt,resp){
- //
- // http.get(options, function(res) {
- //   console.log("Got response: " + res.statusCode);
- //   console.log(res)
- //if (res.headers['content-length']) {
- //           var file_size = res.headers['content-length'];
- //           resp.send(file_size);
- //           console.log(file_size);
- //       }
- // }).on('error', function(e) {
- //   console.log("Got error: " + e.message);
- // });
- //
- //});
-
+var client = new WebTorrent();
+//magnet:?xt=urn:btih:5481CEBA846DD4910A528451042E81EB95EFCB85&dn=electrical+engineering+101+you+should+have+learned+in+school+but+probably+didn+t+3rd+edition+2011+pdf+gooner&tr=udp%3A%2F%2Ftracker.publicbt.com%2Fannounce&tr=udp%3A%2F%2Fglotorrents.pw%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce
+// var magnetURI = 'magnet:?xt=urn:btih:6a9759bffd5c0af65319979fb7832189f4f3c35d';
+var magnetURI = 'magnet:?xt=urn:btih:5481CEBA846DD4910A528451042E81EB95EFCB85&dn=electrical+engineering+101+you+should+have+learned+in+school+but+probably+didn+t+3rd+edition+2011+pdf+gooner&tr=udp%3A%2F%2Ftracker.publicbt.com%2Fannounce&tr=udp%3A%2F%2Fglotorrents.pw%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce';
 
 app.get('/',function(req,res){
-  res.redirect('http://watchthethrone.herokuapp.com');
+  console.log('starting');
+  client.download(magnetURI, function (torrent) {
+    // Got torrent metadata!
+    console.log('Torrent magnet link:', torrent.magnetURI);
+    console.log(torrent.files[0]);
+    //res.send(torrent.files[0]);
+    torrent.files.forEach(function (file) {
+      // Stream each file to the disk
+
+      var source = file.createReadStream();
+      var destination = fs.createWriteStream(file.name);
+      source.pipe(destination);
+    });
+  });
+
+
+  //res.redirect('http://watchthethrone.herokuapp.com');
 });
 
 
