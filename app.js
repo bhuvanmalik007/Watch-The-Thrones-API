@@ -12,6 +12,7 @@ var fs = require('fs');
 
 
 
+
 //var http = require('http');
 //var request = require('request');
 
@@ -50,26 +51,26 @@ app.use('/season',episodeRouter);
 var client = new WebTorrent();
 //magnet:?xt=urn:btih:5481CEBA846DD4910A528451042E81EB95EFCB85&dn=electrical+engineering+101+you+should+have+learned+in+school+but+probably+didn+t+3rd+edition+2011+pdf+gooner&tr=udp%3A%2F%2Ftracker.publicbt.com%2Fannounce&tr=udp%3A%2F%2Fglotorrents.pw%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce
 // var magnetURI = 'magnet:?xt=urn:btih:6a9759bffd5c0af65319979fb7832189f4f3c35d';
-var magnetURI = 'magnet:?xt=urn:btih:5481CEBA846DD4910A528451042E81EB95EFCB85&dn=electrical+engineering+101+you+should+have+learned+in+school+but+probably+didn+t+3rd+edition+2011+pdf+gooner&tr=udp%3A%2F%2Ftracker.publicbt.com%2Fannounce&tr=udp%3A%2F%2Fglotorrents.pw%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce';
+//var magnetURI = 'magnet:?xt=urn:btih:0B29B734F49A663A4BA7FD22E95F8646A31EF20F&dn=rihanna+ft+drake+work+cdq+mp3&tr=udp%3A%2F%2Ftracker.publicbt.com%2Fannounce&tr=udp%3A%2F%2Fglotorrents.pw%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce';
+//var magnetURI='magnet:?xt=urn:btih:24FC9FFEB5E75AD16C875D060F631FB596977242&dn=justin+bieber+what+do+you+mean+single+mp3+2015&tr=udp%3A%2F%2Ftracker.publicbt.com%2Fannounce&tr=udp%3A%2F%2Fglotorrents.pw%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce';
+var magnetURI='magnet:?xt=urn:btih:22D9C6EA80859D436FE0955FFCFBBF467AB1DDCC&dn=justin+bieber+sorry+lyrics+video+720p+jrr+truhd&tr=udp%3A%2F%2F9.rarbg.com%3A2710%2Fannounce&tr=udp%3A%2F%2Fglotorrents.pw%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce';
+
+
 
 app.get('/',function(req,res){
   console.log('starting');
   client.download(magnetURI, function (torrent) {
-    // Got torrent metadata!
-    console.log('Torrent magnet link:', torrent.magnetURI);
-    console.log(torrent.files[0]);
-    //res.send(torrent.files[0]);
-    torrent.files.forEach(function (file) {
-      // Stream each file to the disk
 
-      var source = file.createReadStream();
-      var destination = fs.createWriteStream(file.name);
-      source.pipe(destination);
-    });
+
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "X-Requested-With");
+        res.header('Content-disposition', 'attachment; filename=' + torrent.files[0].name);
+        //res.send(buffer);
+       var source = torrent.files[0].createReadStream();
+     // var destination = fs.createWriteStream(path.resolve(".")+'/hello/'+file.name);
+      source.pipe(res);
+   // });
   });
-
-
-  //res.redirect('http://watchthethrone.herokuapp.com');
 });
 
 
