@@ -1,6 +1,9 @@
 var episodeController = function(Episode){
 
 
+
+
+
     var post = function (req, res) {
         var episode = new Episode(req.body);
         episode.save();
@@ -149,6 +152,7 @@ var episodeController = function(Episode){
     }
 
 
+
     var delbyid = function(req,res){
         Episode.findById(req.params.id, function(err,episode){
             if(err)
@@ -177,6 +181,7 @@ var episodeController = function(Episode){
 
 
 
+
     return{
         post:post,
 
@@ -190,6 +195,7 @@ var episodeController = function(Episode){
         patch:patch,
         del:del,
         delbyid:delbyid
+
 
 
     }

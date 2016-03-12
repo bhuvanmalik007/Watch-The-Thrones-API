@@ -58,7 +58,7 @@ var client = new WebTorrent();
 
 
 app.get('/:m',function(req,res){
-  console.log('starting');
+ // console.log('starting');
   client.download(req.params.m, function (torrent) {
 
 
