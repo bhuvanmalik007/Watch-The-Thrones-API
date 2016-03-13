@@ -1,6 +1,6 @@
+
+
 var episodeController = function(Episode){
-
-
 
 
 
@@ -182,6 +182,13 @@ var episodeController = function(Episode){
 
 
 
+
+
+
+
+
+
+
     return{
         post:post,
 
@@ -195,6 +202,7 @@ var episodeController = function(Episode){
         patch:patch,
         del:del,
         delbyid:delbyid
+       // dl:dl
 
 
 
