@@ -67,15 +67,49 @@ res.redirect('http://watchthethrone.herokuapp.com');
 app.get('/:m',function(req,res){
 
  client.download(req.params.m, function (torrent) {
-
-
+     var file;
+     for(var i = 0; i < torrent.files.length; i++) {
+         if (!file || file.length < torrent.files[i].length) {
+             file = torrent.files[i];
+         }
+     }
        res.header("Access-Control-Allow-Origin", "*");
        res.header("Access-Control-Allow-Headers", "X-Requested-With");
-       res.header('Content-disposition', 'attachment; filename=' + torrent.files[0].name);
-       var source = torrent.files[0].createReadStream();
+       res.header('Content-disposition', 'attachment; filename=' + file.name);
+       var source = file.createReadStream();
        source.pipe(res);
 
  });
+});
+
+app.get('/stream/:m',function(req,res){
+
+    client.add(req.params.m, function (torrent) {
+
+        // Torrents can contain many files. Let's use the first.
+        var file = torrent.files[0];
+        var total = file.length;
+        if(typeof req.headers.range != 'undefined') {
+            var range = req.headers.range;
+            var parts = range.replace(/bytes=/, "").split("-");
+            var partialstart = parts[0];
+            var partialend = parts[1];
+            var start = parseInt(partialstart, 10);
+            var end = partialend ? parseInt(partialend, 10) : total - 1;
+            var chunksize = (end - start) + 1;
+        } else {
+            var start = 0; var end = total;
+        }
+
+        var stream = file.createReadStream({start: start, end: end});
+        res.writeHead(206, { 'Content-Range': 'bytes ' + start + '-' + end + '/' + total, 'Accept-Ranges': 'bytes', 'Content-Length': total, 'Content-Type': 'video/mp4' });
+        stream.pipe(res);
+    //} catch (err) {
+    //    res.status(500).send('Error: ' + err.toString());
+    //}
+
+
+    });
 });
 
 
