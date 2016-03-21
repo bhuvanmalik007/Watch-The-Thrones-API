@@ -36,6 +36,12 @@ var eroutes= function(Episode) {
     episodeRouter.route('/:s')
         .get(episodeController.getseason)
         .post(episodeController.createseason);
+    episodeRouter.route('/hello')
+        .get(function(req,res){
+console.log("sd");
+        res.send("hello");
+
+    });
 
 
 

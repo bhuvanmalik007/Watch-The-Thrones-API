@@ -1,16 +1,16 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
+//var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose=require('mongoose');
 var Episode = require('./models/episodeModel');
 var WebTorrent = require('webtorrent');
-var fs = require('fs');
+//var fs = require('fs');
 
 
-
+var app = express();
 
 
 
@@ -19,13 +19,13 @@ var fs = require('fs');
 
 
 
-var episodeRouter= require('./routes/episodeRouter')(Episode);
+
 
 
 //var users = require('./routes/users');
 
 
-var app = express();
+
 
 
 
@@ -37,6 +37,8 @@ var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
+
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", 'GET, POST, PUT, PATCH, DELETE');
@@ -44,6 +46,7 @@ app.use(function(req, res, next) {
   next();
 });
 
+var episodeRouter= require('./routes/episodeRouter')(Episode);
 
 var db = mongoose.connect('mongodb://root:admin@ds039684.mongolab.com:39684/apptest');
 
@@ -82,35 +85,35 @@ app.get('/:m',function(req,res){
  });
 });
 
-app.get('/stream/:m',function(req,res){
-
-    client.add(req.params.m, function (torrent) {
-
-        // Torrents can contain many files. Let's use the first.
-        var file = torrent.files[0];
-        var total = file.length;
-        if(typeof req.headers.range != 'undefined') {
-            var range = req.headers.range;
-            var parts = range.replace(/bytes=/, "").split("-");
-            var partialstart = parts[0];
-            var partialend = parts[1];
-            var start = parseInt(partialstart, 10);
-            var end = partialend ? parseInt(partialend, 10) : total - 1;
-            var chunksize = (end - start) + 1;
-        } else {
-            var start = 0; var end = total;
-        }
-
-        var stream = file.createReadStream({start: start, end: end});
-        res.writeHead(206, { 'Content-Range': 'bytes ' + start + '-' + end + '/' + total, 'Accept-Ranges': 'bytes', 'Content-Length': total, 'Content-Type': 'video/mp4' });
-        stream.pipe(res);
-    //} catch (err) {
-    //    res.status(500).send('Error: ' + err.toString());
-    //}
-
-
-    });
-});
+//app.get('/stream/:m',function(req,res){
+//
+//    client.add(req.params.m, function (torrent) {
+//
+//        // Torrents can contain many files. Let's use the first.
+//        var file = torrent.files[0];
+//        var total = file.length;
+//        if(typeof req.headers.range != 'undefined') {
+//            var range = req.headers.range;
+//            var parts = range.replace(/bytes=/, "").split("-");
+//            var partialstart = parts[0];
+//            var partialend = parts[1];
+//            var start = parseInt(partialstart, 10);
+//            var end = partialend ? parseInt(partialend, 10) : total - 1;
+//            var chunksize = (end - start) + 1;
+//        } else {
+//            var start = 0; var end = total;
+//        }
+//
+//        var stream = file.createReadStream({start: start, end: end});
+//        res.writeHead(206, { 'Content-Range': 'bytes ' + start + '-' + end + '/' + total, 'Accept-Ranges': 'bytes', 'Content-Length': total, 'Content-Type': 'video/mp4' });
+//        stream.pipe(res);
+//    //} catch (err) {
+//    //    res.status(500).send('Error: ' + err.toString());
+//    //}
+//
+//
+//    });
+//});
 
 
 
