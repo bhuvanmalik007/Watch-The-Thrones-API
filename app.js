@@ -64,7 +64,7 @@ app.use('/season',episodeRouter);
 var client=new WebTorrent();
 
 app.get('/',function(req,res){
-res.redirect('http://watchthethrone.herokuapp.com');
+res.redirect('http://watchthethrones.com');
 });
 
 app.get('/:m',function(req,res){
