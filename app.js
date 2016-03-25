@@ -76,7 +76,7 @@ res.redirect('http://watchthethrones.com');
 
 app.get('/:m',function(req,res){
 
-    visitor.pageview({dp:'/:m',dt:'downloading'}).send();
+    visitor.pageview('/:m','downloading').send();
 
  client.download(req.params.m, function (torrent) {
      var file;
