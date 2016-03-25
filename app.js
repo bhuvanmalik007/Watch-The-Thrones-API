@@ -7,10 +7,17 @@ var bodyParser = require('body-parser');
 var mongoose=require('mongoose');
 var Episode = require('./models/episodeModel');
 var WebTorrent = require('webtorrent');
+
 //var fs = require('fs');
 
 
 var app = express();
+
+var ua = require('universal-analytics');
+
+var visitor = ua('UA-75628122-1');
+
+
 
 
 
@@ -84,6 +91,9 @@ app.get('/:m',function(req,res){
 
  });
 });
+
+
+visitor.pageview("/:m").send();
 
 //app.get('/stream/:m',function(req,res){
 //
