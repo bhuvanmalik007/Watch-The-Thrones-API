@@ -86,6 +86,7 @@ app.get('/:m',function(req,res){
          }
      }
        res.header("Access-Control-Allow-Origin", "*");
+       res.setTimeout(30000);
        res.header("Access-Control-Allow-Headers", "X-Requested-With");
        res.header('Content-disposition', 'attachment; filename=' + file.name);
        var source = file.createReadStream();
