@@ -71,27 +71,36 @@ app.use('/season',episodeRouter);
 var client=new WebTorrent();
 
 app.get('/',function(req,res){
-res.redirect('http://watchthethrones.com');
+//res.redirect('http://watchthethrones.com');
+    console.log("sab thik hai");
+    res.send("sab thik hai");
 });
 
-app.get('/:m',function(req,res){
+app.get('/download/:m',function(req,res){
 
     visitor.pageview('/:m','downloading').send();
-
+    console.log("dusra route");
  client.download(req.params.m, function (torrent) {
+     console.log("torrent processing started");
      var file;
      for(var i = 0; i < torrent.files.length; i++) {
          if (!file || file.length < torrent.files[i].length) {
              file = torrent.files[i];
          }
      }
+     torrent.on('warning', function (err) {
+         console.log("Chances of err, warning about"+err);
+     })
+     torrent.on('ready', function () {
+         console.log("Torrent Ready to be Stream");
+     })
+     torrent.on('error', function (err) {
+         console.error("Torrent Stopped with err "+err);
+     })
        res.header("Access-Control-Allow-Origin", "*");
-       res.setTimeout(30000);
        res.header("Access-Control-Allow-Headers", "X-Requested-With");
        res.header('Content-disposition', 'attachment; filename=' + file.name);
-       var source = file.createReadStream();
-       source.pipe(res);
-
+       file.createReadStream().pipe(res);
  });
 });
 
