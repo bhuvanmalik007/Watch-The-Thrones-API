@@ -127,10 +127,19 @@ app.get('/stream/:m',function(req,res){
         })
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "X-Requested-With");
-        res.header('Content-disposition', 'attachment; filename=' + file.name);
-        file.createReadStream().pipe(concat(function (buf){
-            res.send(buf);
-        }));
+        //res.header('Content-disposition', 'attachment; filename=' + file.name);
+        var total = file.length;
+        var range = "bytes=0-100";
+        var positions = range.replace(/bytes=/, "").split("-");
+        var start = parseInt(positions[0], 10);
+        var end = positions[1] ? parseInt(positions[1], 10) : total - 1;
+        var chunksize = (end - start) + 1;
+            res.writeHead(206, {
+                "Content-Range": "bytes " + start + "-" + end + "/" + total,
+                "Accept-Ranges": "bytes",
+                "Content-Length": file.length
+            });
+        file.createReadStream().pipe(res);
     });
 });
 
