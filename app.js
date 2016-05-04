@@ -90,7 +90,7 @@ app.get('/download/:m',function(req,res){
          console.log("Chances of err, warning about"+err);
      })
      torrent.on('ready', function () {
-         console.log("Torrent Ready to be Stream");
+         console.log("Torrent Ready to be Streamed");
      })
      torrent.on('error', function (err) {
          console.error("Torrent Stopped with err "+err);
@@ -98,7 +98,9 @@ app.get('/download/:m',function(req,res){
        res.header("Access-Control-Allow-Origin", "*");
        res.header("Access-Control-Allow-Headers", "X-Requested-With");
        res.header('Content-disposition', 'attachment; filename=' + file.name);
-       file.createReadStream().pipe(res);
+       res.header('Content-Length', file.length );
+
+     file.createReadStream().pipe(res);
  });
 });
 
@@ -142,39 +144,6 @@ app.get('/stream/:m',function(req,res){
         file.createReadStream().pipe(res);
     });
 });
-
-
-
-
-//app.get('/stream/:m',function(req,res){
-//
-//    client.add(req.params.m, function (torrent) {
-//
-//        // Torrents can contain many files. Let's use the first.
-//        var file = torrent.files[0];
-//        var total = file.length;
-//        if(typeof req.headers.range != 'undefined') {
-//            var range = req.headers.range;
-//            var parts = range.replace(/bytes=/, "").split("-");
-//            var partialstart = parts[0];
-//            var partialend = parts[1];
-//            var start = parseInt(partialstart, 10);
-//            var end = partialend ? parseInt(partialend, 10) : total - 1;
-//            var chunksize = (end - start) + 1;
-//        } else {
-//            var start = 0; var end = total;
-//        }
-//
-//        var stream = file.createReadStream({start: start, end: end});
-//        res.writeHead(206, { 'Content-Range': 'bytes ' + start + '-' + end + '/' + total, 'Accept-Ranges': 'bytes', 'Content-Length': total, 'Content-Type': 'video/mp4' });
-//        stream.pipe(res);
-//    //} catch (err) {
-//    //    res.status(500).send('Error: ' + err.toString());
-//    //}
-//
-//
-//    });
-//});
 
 
 
