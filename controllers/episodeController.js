@@ -5,11 +5,9 @@ var episodeController = function(Episode){
 
 
     var post = function (req, res) {
-        console.log("fuck man");
         var episode = new Episode(req.body);
         episode.save();
         console.log(episode);
-        console.log("fuck man");
         res.send(episode);
     }
 

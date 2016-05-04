@@ -71,9 +71,7 @@ app.use('/season',episodeRouter);
 var client=new WebTorrent();
 
 app.get('/',function(req,res){
-//res.redirect('http://watchthethrones.com');
-    console.log("sab thik hai");
-    res.send("sab thik hai");
+    res.redirect('http://watchthethrones.com');
 });
 
 app.get('/download/:m',function(req,res){
