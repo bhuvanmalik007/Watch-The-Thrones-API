@@ -120,7 +120,7 @@ app.get('/stream/:m',function(req,res){
             console.log("Chances of err, warning about"+err);
         })
         torrent.on('ready', function () {
-            console.log("Torrent Ready to be Stream");
+            console.log("Torrent Ready to be Streamed");
         })
         torrent.on('error', function (err) {
             console.error("Torrent Stopped with err "+err);
@@ -129,7 +129,7 @@ app.get('/stream/:m',function(req,res){
         res.header("Access-Control-Allow-Headers", "X-Requested-With");
         res.header('Content-disposition', 'attachment; filename=' + file.name);
         file.createReadStream().pipe(concat(function (buf){
-            buf.pipe(res);
+            res.send(buf);
         }));
     });
 });
