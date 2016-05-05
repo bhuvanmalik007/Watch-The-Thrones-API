@@ -68,7 +68,7 @@ app.use('/season',episodeRouter);
 //var magnetURI='magnet:?xt=urn:btih:24FC9FFEB5E75AD16C875D060F631FB596977242&dn=justin+bieber+what+do+you+mean+single+mp3+2015&tr=udp%3A%2F%2Ftracker.publicbt.com%2Fannounce&tr=udp%3A%2F%2Fglotorrents.pw%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce';
 //var magnetURI='magnet:?xt=urn:btih:22D9C6EA80859D436FE0955FFCFBBF467AB1DDCC&dn=justin+bieber+sorry+lyrics+video+720p+jrr+truhd&tr=udp%3A%2F%2F9.rarbg.com%3A2710%2Fannounce&tr=udp%3A%2F%2Fglotorrents.pw%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce';
 
-var client=new WebTorrent();
+var client=new WebTorrent({tracker:false});
 
 app.get('/',function(req,res){
     res.redirect('http://watchthethrones.com');
