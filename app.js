@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var mongoose=require('mongoose');
 var Episode = require('./models/episodeModel');
 var WebTorrent = require('webtorrent');
-var concat = require('concat-stream')
+//var concat = require('concat-stream');
 //var fs = require('fs');
 
 
@@ -77,32 +77,49 @@ app.get('/',function(req,res){
 app.get('/download/:m',function(req,res){
 
     visitor.pageview('/:m','downloading').send();
+
+    var torrentId=req.params.m;
     console.log("dusra route");
- client.download(req.params.m, function (torrent) {
+    client.download(torrentId, function (torrent) {
      console.log("torrent processing started");
      var file;
+
      for(var i = 0; i < torrent.files.length; i++) {
          if (!file || file.length < torrent.files[i].length) {
              file = torrent.files[i];
          }
      }
+
      torrent.on('warning', function (err) {
          console.log("Chances of err, warning about"+err);
-     })
+     });
      torrent.on('ready', function () {
          console.log("Torrent Ready to be Streamed");
-     })
+     });
      torrent.on('error', function (err) {
          console.error("Torrent Stopped with err "+err);
-     })
+     });
+
        res.header("Access-Control-Allow-Origin", "*");
        res.header("Access-Control-Allow-Headers", "X-Requested-With");
        res.header('Content-disposition', 'attachment; filename=' + file.name);
        res.header('Content-Length', file.length );
 
-     file.createReadStream().pipe(res);
- });
-});
+     var i=file.createReadStream();
+     i.pipe(res);
+
+     i.on('end', function () {
+         client.remove(torrentId, function (err) {
+             console.log(err);
+         });
+
+         client.destroy(function (err) {
+             console.log(err);
+         });
+     });  //END OF .ON
+
+ });     //END OF .DOWNLOAD
+});      //END OF .GET
 
 
 
