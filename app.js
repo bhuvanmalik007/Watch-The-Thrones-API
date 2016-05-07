@@ -109,12 +109,17 @@ app.get('/download/:m',function(req,res){
      i.pipe(res);
 
      i.on('end', function () {
+         console.log("end of readstream");
          client.remove(torrentId, function (err) {
              console.log(err);
          });
 
          client.destroy(function (err) {
              console.log(err);
+         });
+
+         torrent.destroy(function(){
+             console.log("torrent: "+file.name+ "destroyed");
          });
      });  //END OF .ON
 
