@@ -48,6 +48,13 @@ var episodeController = function(Episode){
                 episodes.sort(function (a, b){
                     return a.episode- b.episode;
                 });
+                for(var i=0;i<episodes.length;i++){
+
+
+                    episodes[i]['href480']=decodeURIComponent(episodes[i]['href480']);
+                    episodes[i]['href720']=decodeURIComponent(episodes[i]['href720']);
+                }
+
                 res.json(episodes);
             }
         });
